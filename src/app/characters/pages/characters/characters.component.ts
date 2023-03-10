@@ -11,7 +11,7 @@ import {map, Subscription} from "rxjs";
   styleUrls: ['./characters.component.css']
 })
 export class CharactersComponent implements AfterViewInit, OnDestroy {
-  private sub!:Subscription;
+  private subscription!:Subscription;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -20,7 +20,7 @@ export class CharactersComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.sub = this.route.queryParams.pipe(
+    this.subscription = this.route.queryParams.pipe(
       map(mapRouteParamsToCharacterQuery),
     )
       .subscribe({
@@ -31,7 +31,7 @@ export class CharactersComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   onNameFilter(name: string) {
