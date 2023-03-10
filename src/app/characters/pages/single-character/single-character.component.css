@@ -4,7 +4,7 @@
   text-transform: uppercase;
   font-weight: 600;
   display: block;
-  margin: 2rem 0 0 4rem;
+  margin: 2rem 0 0 calc(3vw);
   font-size: 1.4rem;
   font-family: karia, serif
 }
