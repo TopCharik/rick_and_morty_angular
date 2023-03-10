@@ -1,1 +1,2 @@
-<p>pager works!</p>
+  <button [disabled]="!hasPrevPage" (click)="prevPage.emit()">Previous page</button>
+  <button [disabled]="!hasNextPage" (click)="nextPage.emit()">Next page</button>

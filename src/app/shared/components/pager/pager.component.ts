@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-pager',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pager.component.css']
 })
 export class PagerComponent implements OnInit {
+  @Input() hasPrevPage!: boolean;
+  @Input() hasNextPage!: boolean;
+  @Output() prevPage = new EventEmitter();
+  @Output() nextPage = new EventEmitter();
 
   constructor() { }
 
