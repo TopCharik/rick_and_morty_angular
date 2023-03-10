@@ -1,1 +1,4 @@
 <p>character-list works!</p>
+<div *ngFor="let c of characters$ | async" routerLink="/characters/{{c.id}}">
+  {{c.name}}
+</div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CharactersComponent } from './pages/characters/characters.component';
 import { SingleCharacterComponent } from './pages/single-character/single-character.component';
 import { CharacterListComponent } from './pages/characters/character-list/character-list.component';
+import {RouterLink} from "@angular/router";
 
 
 
@@ -12,8 +13,9 @@ import { CharacterListComponent } from './pages/characters/character-list/charac
     SingleCharacterComponent,
     CharacterListComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        RouterLink
+    ]
 })
 export class CharactersModule { }
