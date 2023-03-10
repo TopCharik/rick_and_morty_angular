@@ -4,6 +4,7 @@ import { CharactersComponent } from './pages/characters/characters.component';
 import { SingleCharacterComponent } from './pages/single-character/single-character.component';
 import { CharacterListComponent } from './pages/characters/character-list/character-list.component';
 import {RouterLink} from "@angular/router";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -13,9 +14,10 @@ import {RouterLink} from "@angular/router";
     SingleCharacterComponent,
     CharacterListComponent
   ],
-    imports: [
-        CommonModule,
-        RouterLink
-    ]
+  imports: [
+    CommonModule,
+    RouterLink,
+    SharedModule
+  ]
 })
 export class CharactersModule { }

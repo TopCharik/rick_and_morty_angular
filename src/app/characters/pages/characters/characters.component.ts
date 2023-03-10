@@ -1,6 +1,6 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {CharactersService} from "../../characters.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {mapRouteParamsToCharacterQuery} from "../../helpers/charactersMapper";
 import {CharactersQuery} from "../../models/characterQuery";
 import {map} from "rxjs";
@@ -15,6 +15,7 @@ export class CharactersComponent implements AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public characterService: CharactersService
   ) {
   }
@@ -30,4 +31,10 @@ export class CharactersComponent implements AfterViewInit {
       });
   }
 
+  onNameFilter(name: string) {
+    const params = this.characterService.currentCharacterParams;
+    params.name = name;
+    params.page = 1;
+    this.router.navigate([], {queryParams: params});
+  }
 }
