@@ -1,3 +1,10 @@
-<div *ngFor="let c of characters$ | async" routerLink="/characters/{{c.id}}">
-  {{c.name}}
+<div *ngIf="characters$">
+  <div class="cards">
+    <app-character-card
+      class="character-card"
+      *ngFor="let c of characters$ | async"
+      [character]="c"
+    >
+    </app-character-card>
+  </div>
 </div>
