@@ -37,4 +37,18 @@ export class CharactersComponent implements AfterViewInit {
     params.page = 1;
     this.router.navigate([], {queryParams: params});
   }
+
+  onNextPage() {
+    const params = this.characterService.currentCharacterParams;
+    params.page++;
+
+    this.router.navigate([], {queryParams: params});
+  }
+
+  onPrevPage() {
+    const params = this.characterService.currentCharacterParams;
+    params.page--;
+
+    this.router.navigate([], {queryParams: params});
+  }
 }

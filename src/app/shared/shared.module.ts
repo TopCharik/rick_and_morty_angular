@@ -12,9 +12,10 @@ import { PagerComponent } from './components/pager/pager.component';
         InputFilterComponent,
         PagerComponent
     ],
-    exports: [
-        InputFilterComponent
-    ],
+  exports: [
+    InputFilterComponent,
+    PagerComponent
+  ],
     imports: [
         CommonModule
     ]
