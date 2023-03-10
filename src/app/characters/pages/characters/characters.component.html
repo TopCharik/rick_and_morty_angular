@@ -7,6 +7,7 @@
 
   <ng-template [ngIf]="( characterService.pagingInfo$ | async )" let-pagingInfo="$implicit">
     <app-pager
+      *ngIf="pagingInfo.hasPrev || pagingInfo.hasNext"
       [hasPrevPage]="pagingInfo.hasPrev"
       [hasNextPage]="pagingInfo.hasNext"
       (prevPage)="onPrevPage()"
