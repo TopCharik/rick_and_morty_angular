@@ -1,0 +1,17 @@
+<div class="card-container" *ngIf="character">
+  <div class="card-image">
+    <img
+      src="{{character.image}}"
+      class="card-image" alt="{{character.name}}"
+      routerLink="/characters/{{character.id}}"
+    >
+  </div>
+  <div class="card-label-container">
+    <div class="card-label">
+      <h4 class="card-label-name">
+        <b>{{character.name}}</b>
+      </h4>
+      <p class="card-label-species">{{character.species}}</p>
+    </div>
+  </div>
+</div>

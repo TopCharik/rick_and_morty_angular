@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CharactersService} from "../../characters.service";
+import {Character} from "../../models/character";
 
 @Component({
   selector: 'app-single-character',
@@ -7,18 +9,30 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./single-character.component.css']
 })
 export class SingleCharacterComponent implements OnInit {
-  characterId!: number;
+  character!: Character;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router,public characterService: CharactersService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe({
       next: res => {
         const id = res["id"];
-        if (id === null) throw Error("id not specified");
-        this.characterId = id;
+        this.characterService.getSingleCharacter(id).subscribe({
+          next: character => {
+            console.log(character);
+            this.character = character
+          },
+          error: () =>  this.router.navigate(["/not-found"]),
+        })
       }
     }).unsubscribe();
+
+
+  }
+
+  onReturn() {
+    const params = this.characterService.currentCharacterParams ?? {};
+    this.router.navigate(["/characters"], {queryParams: params})
   }
 
 }

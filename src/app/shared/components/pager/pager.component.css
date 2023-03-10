@@ -1,0 +1,24 @@
+.paging-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pager-btn {
+  width: 100%;
+}
+
+.pager-btn-left {
+  margin-left: 1rem;
+}
+
+.pager-btn-right {
+  margin-right: 1rem;
+}
+
+@media (max-width: 450px) {
+  .pager-btn {
+    height: 75px;
+    text-align: center;
+  }
+}

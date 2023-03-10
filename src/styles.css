@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn-primary {
+  border: 1px solid #114354;
+  background-color: #4c77af;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  border: 1px solid #0099cc;
+  background-color: #00aacc;
+  color: #ffffff;
+}
+
+.btn-primary:disabled,
+.btn-primary[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.btn-return {
+
+}
+
+.gray {
+  color: #8E8E93;
+}
+
+html {
+  font-family: roboto, serif;
+}

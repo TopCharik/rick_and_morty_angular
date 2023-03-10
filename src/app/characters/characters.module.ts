@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { CharactersComponent } from './pages/characters/characters.component';
 import { SingleCharacterComponent } from './pages/single-character/single-character.component';
 import { CharacterListComponent } from './pages/characters/character-list/character-list.component';
+import {RouterLink} from "@angular/router";
+import {SharedModule} from "../shared/shared.module";
+import { CharacterCardComponent } from './pages/characters/character-list/character-card/character-card.component';
 
 
 
@@ -10,10 +13,13 @@ import { CharacterListComponent } from './pages/characters/character-list/charac
   declarations: [
     CharactersComponent,
     SingleCharacterComponent,
-    CharacterListComponent
+    CharacterListComponent,
+    CharacterCardComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink,
+    SharedModule
   ]
 })
 export class CharactersModule { }

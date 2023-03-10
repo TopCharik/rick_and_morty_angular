@@ -1,0 +1,39 @@
+.container {
+  width: 1200px;
+  min-height: 100vh;
+  height: 100%;
+  max-width: calc(100% - 50px);
+  margin: 0 auto 1rem;
+}
+
+.cards {
+  max-width: 1200px;
+  margin: 3rem 0;
+  display: grid;
+  gap: 3rem;
+}
+
+.banner-image {
+  width: 60%;
+  height: auto;
+}
+
+
+@media (min-width: 600px) {
+  .container {
+    max-width: calc(100% - 75px);
+  }
+}
+
+@media (min-width: 900px) {
+  .container {
+    max-width: calc(100% - 100px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: calc(100% - 150px);
+  }
+}
+

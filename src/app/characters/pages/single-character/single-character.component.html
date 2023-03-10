@@ -1,2 +1,55 @@
-<p>single-character works!</p>
-<p>character {{characterId}} loaded.</p>
+<div class="single-character-header">
+  <a class="return-button btn" (click)="onReturn()">
+    go back
+  </a>
+</div>
+
+<div class="single-info-character-container" *ngIf="character">
+  <img src="{{character.image}}" alt="{{character.name}}" class="character-image center">
+  <h1 class="character-name">{{character.name}}</h1>
+  <h2 class="character-information-header gray">Information</h2>
+  <div class="character-information">
+    <div class="character-property">
+      <div class="character-property-name">
+        Gender
+      </div>
+      <div class="character-property-value">
+        {{character.gender}}
+      </div>
+    </div>
+    <div class="character-property">
+      <div class="character-property-name">
+        Status
+      </div>
+      <div class="character-property-value">
+        {{character.status}}
+      </div>
+    </div>
+    <div class="character-property">
+      <div class="character-property-name">
+        Specie
+      </div>
+      <div class="character-property-value">
+        {{character.species}}
+      </div>
+    </div>
+    <div class="character-property">
+      <div class="character-property-name">
+        Origin
+      </div>
+      <div class="character-property-value">
+        {{character.origin.name}}
+      </div>
+    </div>
+    <ng-template [ngIf]="character.type !== ''">
+      <div class="character-property">
+        <div class="character-property-name">
+          Type
+        </div>
+        <div class="character-property-value">
+          {{character.type}}
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

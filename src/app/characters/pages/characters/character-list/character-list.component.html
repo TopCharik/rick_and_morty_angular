@@ -1,1 +1,10 @@
-<p>character-list works!</p>
+<div *ngIf="characters$">
+  <div class="cards">
+    <app-character-card
+      class="character-card"
+      *ngFor="let c of characters$ | async"
+      [character]="c"
+    >
+    </app-character-card>
+  </div>
+</div>

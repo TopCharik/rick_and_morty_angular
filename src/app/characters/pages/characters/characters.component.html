@@ -1,1 +1,20 @@
-<p>characters works!</p>
+<div class="container">
+  <img src="/assets/img/san.png" alt="" class="banner-image center">
+
+  <app-input-filter (inputEmit)="onNameFilter($event)" ></app-input-filter>
+
+  <app-character-list [characters$]="characterService.characters$"></app-character-list>
+
+  <ng-template [ngIf]="( characterService.pagingInfo$ | async )" let-pagingInfo="$implicit">
+    <app-pager
+      *ngIf="pagingInfo.hasPrev || pagingInfo.hasNext"
+      [hasPrevPage]="pagingInfo.hasPrev"
+      [hasNextPage]="pagingInfo.hasNext"
+      (prevPage)="onPrevPage()"
+      (nextPage)="onNextPage()"
+    >
+    </app-pager>
+  </ng-template>
+
+</div>
+

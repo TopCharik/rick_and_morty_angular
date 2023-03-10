@@ -7,13 +7,17 @@ import { PagerComponent } from './components/pager/pager.component';
 
 
 @NgModule({
-  declarations: [
-    NotFoundComponent,
+    declarations: [
+        NotFoundComponent,
+        InputFilterComponent,
+        PagerComponent
+    ],
+  exports: [
     InputFilterComponent,
     PagerComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule
+    ]
 })
 export class SharedModule { }
