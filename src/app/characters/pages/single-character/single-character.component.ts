@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CharactersService} from "../../characters.service";
-import {HttpErrorResponse} from "@angular/common/http";
 import {Character} from "../../models/character";
 
 @Component({
@@ -19,11 +18,16 @@ export class SingleCharacterComponent implements OnInit {
       next: res => {
         const id = res["id"];
         this.characterService.getSingleCharacter(id).subscribe({
-          next: character => this.character = character,
-          error: (err: HttpErrorResponse) =>  this.router.navigate(["/not-found"]),
+          next: character => {
+            console.log(character);
+            this.character = character
+          },
+          error: () =>  this.router.navigate(["/not-found"]),
         })
       }
     }).unsubscribe();
+
+
   }
 
   onReturn() {
