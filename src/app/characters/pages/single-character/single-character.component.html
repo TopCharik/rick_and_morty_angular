@@ -1,2 +1,5 @@
-<p>single-character works!</p>
-<p>character {{characterId}} loaded.</p>
+<ng-template [ngIf]="character">
+  <p>single-character works!</p>
+  <p>character  {{character.name}} loaded.</p>
+  <button (click)="onReturn()">return</button>
+</ng-template>

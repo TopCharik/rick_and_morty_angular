@@ -4,3 +4,10 @@ export interface PaginationState {
   next: string | null
   prev: string | null
 }
+
+export const initialPaginationState: PaginationState = {
+  count: 0,
+  pages: 0,
+  next: null,
+  prev: null,
+}
