@@ -1,2 +1,4 @@
-  <button [disabled]="!hasPrevPage" (click)="prevPage.emit()">Previous page</button>
-  <button [disabled]="!hasNextPage" (click)="nextPage.emit()">Next page</button>
+<div class="paging-box">
+  <button class="btn btn-primary pager-btn pager-btn-right" [disabled]="!hasPrevPage" (click)="prevPage.emit()">Previous page</button>
+  <button class="btn btn-primary pager-btn pager-btn-left" [disabled]="!hasNextPage" (click)="nextPage.emit()">Next page</button>
+</div>

@@ -1,0 +1,20 @@
+.filter-form {
+  margin: 3rem 0 0 0;
+  width: 100%;
+  outline: 0;
+  border: #a6a3a3 solid 1px;
+  font-size: 25px;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #fff;
+  transition: 0.2s ;
+}
+
+.filter-form:hover {
+  border-color: #606060;
+}
+
+.filter-form:focus {
+  border-color: black  ;
+}
+

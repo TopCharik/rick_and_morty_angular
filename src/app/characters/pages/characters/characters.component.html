@@ -1,11 +1,18 @@
-<app-input-filter (inputEmit)="onNameFilter($event)"></app-input-filter>
-<app-character-list [characters$]="characterService.characters$"></app-character-list>
-<ng-template [ngIf]="( characterService.pagingInfo$ | async )" let-pagingInfo="$implicit">
-  <app-pager
-    [hasPrevPage]="pagingInfo.hasPrev"
-    [hasNextPage]="pagingInfo.hasNext"
-    (prevPage)="onPrevPage()"
-    (nextPage)="onNextPage()"
-  >
-  </app-pager>
-</ng-template>
+<div class="container">
+
+  <app-input-filter (inputEmit)="onNameFilter($event)" ></app-input-filter>
+
+  <app-character-list [characters$]="characterService.characters$"></app-character-list>
+
+  <ng-template [ngIf]="( characterService.pagingInfo$ | async )" let-pagingInfo="$implicit">
+    <app-pager
+      [hasPrevPage]="pagingInfo.hasPrev"
+      [hasNextPage]="pagingInfo.hasNext"
+      (prevPage)="onPrevPage()"
+      (nextPage)="onNextPage()"
+    >
+    </app-pager>
+  </ng-template>
+
+</div>
+
