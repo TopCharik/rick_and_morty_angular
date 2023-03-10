@@ -5,6 +5,7 @@ import { SingleCharacterComponent } from './pages/single-character/single-charac
 import { CharacterListComponent } from './pages/characters/character-list/character-list.component';
 import {RouterLink} from "@angular/router";
 import {SharedModule} from "../shared/shared.module";
+import { CharacterCardComponent } from './pages/characters/character-list/character-card/character-card.component';
 
 
 
@@ -12,7 +13,8 @@ import {SharedModule} from "../shared/shared.module";
   declarations: [
     CharactersComponent,
     SingleCharacterComponent,
-    CharacterListComponent
+    CharacterListComponent,
+    CharacterCardComponent,
   ],
   imports: [
     CommonModule,
