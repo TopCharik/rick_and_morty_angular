@@ -20,7 +20,7 @@ export class CharactersComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.route.queryParams.pipe(
+    this.sub = this.route.queryParams.pipe(
       map(mapRouteParamsToCharacterQuery),
     )
       .subscribe({
