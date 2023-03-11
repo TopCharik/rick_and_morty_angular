@@ -1,7 +1,7 @@
 <div class="container">
   <img src="/assets/img/san.png" alt="" class="banner-image center">
 
-  <app-input-filter (inputEmit)="onNameFilter($event)" ></app-input-filter>
+    <app-input-filter *ngIf="nameInput !== undefined" (inputEmit)="onNameFilter($event)" [initText]="nameInput" ></app-input-filter>
 
   <app-character-list [characters$]="characterService.characters$"></app-character-list>
 

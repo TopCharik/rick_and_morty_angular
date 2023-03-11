@@ -3,7 +3,7 @@ import {CharactersService} from "../../characters.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {mapRouteParamsToCharacterQuery} from "../../helpers/charactersMapper";
 import {CharactersQuery} from "../../models/characterQuery";
-import {map, Subscription} from "rxjs";
+import {map, Subscription, tap} from "rxjs";
 
 @Component({
   selector: 'app-characters',
@@ -12,6 +12,7 @@ import {map, Subscription} from "rxjs";
 })
 export class CharactersComponent implements OnInit, OnDestroy {
   private sub!:Subscription;
+  nameInput?: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -22,6 +23,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.queryParams.pipe(
       map(mapRouteParamsToCharacterQuery),
+      tap(query => this.nameInput = query.name ?? ""),
     )
       .subscribe({
         next: (query: CharactersQuery) => {
