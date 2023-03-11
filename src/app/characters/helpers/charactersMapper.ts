@@ -9,7 +9,7 @@ export const mapRouteParamsToCharacterQuery = (params: Params): CharactersQuery 
     status: params['status'] ,
     species: params['species'] ,
     gender: params['gender'] ,
-    page: isNaN(params['page']) ? 1 : +params['page'],
+    page: +params['page'],
   };
 }
 export const mapCharacterParamsToHttpParams = (params: CharactersQuery): HttpParams => {
