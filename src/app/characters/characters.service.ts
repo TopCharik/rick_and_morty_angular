@@ -44,11 +44,11 @@ export class CharactersService {
       catchError(err => {
         if (err.error.error === "There is nothing here") return of(emptyApiResponse);
         return  throwError(() => err)
-      })
+      }),
     )
       .subscribe({
         next: res => {
-          const characters = res.results;
+          const characters = res.results.sort((a, b) => a.name.localeCompare(b.name));
           const paginationInfo = res.info;
           this.charactersSource.next(characters);
           this.pagingInfoSource.next(paginationInfo);
