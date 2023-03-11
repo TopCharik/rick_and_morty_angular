@@ -1,7 +1,15 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {debounceTime, distinctUntilChanged, filter, fromEvent, map, Subscription, tap} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
-import {mapRouteParamsToCharacterQuery} from "../../../characters/helpers/charactersMapper";
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
+import {debounceTime, distinctUntilChanged, filter, fromEvent, Subscription, tap} from "rxjs";
 
 @Component({
   selector: 'app-input-filter',
@@ -11,15 +19,12 @@ import {mapRouteParamsToCharacterQuery} from "../../../characters/helpers/charac
 export class InputFilterComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('input', {static: true}) input!: ElementRef;
   @Output() inputEmit = new EventEmitter<string>();
+  @Input() initText?: string;
   sub!: Subscription;
-  constructor(private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.route.queryParams.pipe(
-      map(mapRouteParamsToCharacterQuery),
-      tap(query => this.input.nativeElement.value = query.name ?? '')
-    )
-      .subscribe().unsubscribe();
+    if (this.initText && this.initText !== "") this.input.nativeElement.value = this.initText;
   }
 
   ngAfterViewInit() {
