@@ -4,11 +4,11 @@ import {Params} from "@angular/router";
 
 export const mapRouteParamsToCharacterQuery = (params: Params): CharactersQuery => {
   return {
-    name: params['name'] ?? '',
-    type: params['type'] ?? '',
-    status: params['status'] ?? '',
-    species: params['species'] ?? '',
-    gender: params['gender'] ?? '',
+    name: params['name'] ,
+    type: params['type'] ,
+    status: params['status'] ,
+    species: params['species'] ,
+    gender: params['gender'] ,
     page: isNaN(params['page']) ? 1 : +params['page'],
   };
 }
@@ -17,19 +17,19 @@ export const mapCharacterParamsToHttpParams = (params: CharactersQuery): HttpPar
   if (params.page !== 1){
     httpParams = httpParams.append('page', params.page);
   }
-  if (params.name !== undefined && params.name !== ''){
+  if (params.name !== undefined){
     httpParams = httpParams.append('name', params.name);
   }
-  if (params.type !== undefined && params.type !== ''){
+  if (params.type !== undefined){
     httpParams = httpParams.append('type', params.type);
   }
-  if (params.gender !== undefined && params.gender !== ''){
+  if (params.gender !== undefined){
     httpParams = httpParams.append('gender', params.gender);
   }
-  if (params.species !== undefined && params.species !== ''){
+  if (params.species !== undefined){
     httpParams = httpParams.append('species', params.species);
   }
-  if (params.status !== undefined && params.status !== ''){
+  if (params.status !== undefined){
     httpParams = httpParams.append('status', params.status);
   }
   return httpParams;
