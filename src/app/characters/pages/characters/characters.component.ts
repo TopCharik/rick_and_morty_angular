@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CharactersService} from "../../characters.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {mapRouteParamsToCharacterQuery} from "../../helpers/charactersMapper";
@@ -10,7 +10,7 @@ import {map, Subscription} from "rxjs";
   templateUrl: './characters.component.html',
   styleUrls: ['./characters.component.css']
 })
-export class CharactersComponent implements AfterViewInit, OnDestroy {
+export class CharactersComponent implements OnInit, OnDestroy {
   private sub!:Subscription;
   constructor(
     private route: ActivatedRoute,
@@ -19,12 +19,12 @@ export class CharactersComponent implements AfterViewInit, OnDestroy {
   ) {
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.sub = this.route.queryParams.pipe(
       map(mapRouteParamsToCharacterQuery),
     )
       .subscribe({
-        next: (query:CharactersQuery) => {
+        next: (query: CharactersQuery) => {
           this.characterService.loadCharacters(query);
         }
       });
