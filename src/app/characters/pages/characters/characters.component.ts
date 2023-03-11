@@ -38,6 +38,7 @@ export class CharactersComponent implements AfterViewInit, OnDestroy {
     const params = this.characterService.currentCharacterParams;
     params.name = name;
     params.page = 1;
+    console.log(params);
     this.router.navigate([], {queryParams: params});
   }
 

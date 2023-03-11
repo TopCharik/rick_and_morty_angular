@@ -19,7 +19,6 @@ export class SingleCharacterComponent implements OnInit {
         const id = res["id"];
         this.characterService.getSingleCharacter(id).subscribe({
           next: character => {
-            console.log(character);
             this.character = character
           },
           error: () =>  this.router.navigate(["/not-found"]),
