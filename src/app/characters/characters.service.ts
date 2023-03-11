@@ -37,7 +37,7 @@ export class CharactersService {
     private http: HttpClient
   ) {  }
 
-  async loadCharacters(charactersParams: CharactersQuery) {
+  loadCharacters(charactersParams: CharactersQuery) {
 
     const httpParams = mapCharacterParamsToHttpParams(charactersParams);
     this.http.get<PaginatedResponse<Character[]>>(this.baseUrl + "/character", {params: httpParams}).pipe(
