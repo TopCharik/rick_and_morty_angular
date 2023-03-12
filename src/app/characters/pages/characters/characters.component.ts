@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CharactersService} from "../../characters.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {mapRouteParamsToCharacterQuery} from "../../helpers/charactersMapper";
-import {CharactersQuery} from "../../models/characterQuery";
 import {map, Subscription, tap} from "rxjs";
 
 @Component({
@@ -24,12 +23,9 @@ export class CharactersComponent implements OnInit, OnDestroy {
     this.sub = this.route.queryParams.pipe(
       map(mapRouteParamsToCharacterQuery),
       tap(query => this.nameInput = query.name ?? ""),
+      tap(query  => this.characterService.loadCharacters(query)),
     )
-      .subscribe({
-        next: (query: CharactersQuery) => {
-          this.characterService.loadCharacters(query);
-        }
-      });
+      .subscribe();
   }
 
   ngOnDestroy(): void {

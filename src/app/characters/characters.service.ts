@@ -35,7 +35,7 @@ export class CharactersService {
 
   constructor(
     private http: HttpClient
-  ) {  }
+  ) {}
 
   async loadCharacters(charactersParams: CharactersQuery) {
 
