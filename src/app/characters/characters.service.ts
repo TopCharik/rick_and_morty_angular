@@ -20,7 +20,8 @@ export class CharactersService {
   constructor(
     private apiProvider: ApiProvider,
     private characterQueryService: CharactersQueryService,
-  ) {  }
+  ) {
+  }
 
 
   updateCharacters(characterParams: CharactersQuery) {
@@ -28,8 +29,6 @@ export class CharactersService {
       isLoading: true,
       isLoaded: false,
     });
-
-  loadCharacters(charactersParams: CharactersQuery) {
 
     this.apiProvider.loadCharacters(characterParams).pipe(
       tap(() => this.characterQueryService.setCurrentQuery(characterParams)),
