@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {CharactersQuery} from "../models/characterQuery";
-import {mapCharacterParamsToHttpParams} from "../../characters/helpers/charactersMapper";
+import {mapCharacterParamsToHttpParams} from "../helpers/charactersMapper";
 import {emptyApiResponse, PaginatedResponse} from "../models/paginatedResponse";
 import {Character} from "../models/character";
 import {catchError, of, throwError} from "rxjs";
