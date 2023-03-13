@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {ApiProvider} from "../../../shared/services/api-provider.service";
-import {CharactersQueryService} from "../../services/characters-query.service";
+import {ApiProvider} from "../../shared/services/api-provider.service";
+import {CharactersQueryService} from "./characters-query.service";
 import {BehaviorSubject, catchError, tap, throwError} from "rxjs";
 import {
   singleCharacterInitialState,
   SingleCharacterState
-} from "../../models/singleCharacterPageModel";
+} from "../models/singleCharacterPageModel";
 
 
 

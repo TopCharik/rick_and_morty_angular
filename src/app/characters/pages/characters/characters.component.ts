@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CharactersService} from "../../characters.service";
+import {CharactersService} from "../../services/characters.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {mapRouteParamsToCharacterQuery} from "../../../shared/helpers/charactersMapper";
 import {map, Subscription, tap} from "rxjs";

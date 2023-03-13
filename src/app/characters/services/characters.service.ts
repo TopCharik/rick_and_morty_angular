@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable, tap} from "rxjs";
-import {PaginationInfo} from "../shared/models/paginationInfo";
-import {CharactersQuery} from "../shared/models/characterQuery";
-import {Character} from "../shared/models/character";
-import {ApiProvider} from "../shared/services/api-provider.service";
-import {CharactersQueryService} from "./services/characters-query.service";
-import {charactersPageInitialState, CharactersState} from "./models/charactersPageModel";
+import {PaginationInfo} from "../../shared/models/paginationInfo";
+import {CharactersQuery} from "../../shared/models/characterQuery";
+import {Character} from "../../shared/models/character";
+import {ApiProvider} from "../../shared/services/api-provider.service";
+import {CharactersQueryService} from "./characters-query.service";
+import {charactersPageInitialState, CharactersState} from "../models/charactersPageModel";
 
 
 @Injectable({

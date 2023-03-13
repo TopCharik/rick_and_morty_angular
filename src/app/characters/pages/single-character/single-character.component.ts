@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {SingleCharacterService} from "./single-character.service";
+import {SingleCharacterService} from "../../services/single-character.service";
 import {map} from "rxjs";
 import {CharactersQuery} from "../../../shared/models/characterQuery";
 
