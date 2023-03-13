@@ -6,7 +6,7 @@ export interface PaginatedResponse<T> {
   results: T[]
 }
 
-export const emptyApiResponse:PaginatedResponse<Character[]> = {
+export const emptyApiResponse:PaginatedResponse<Character> = {
   info: initialPaginationState,
   results: []
 }
