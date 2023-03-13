@@ -1,21 +1,35 @@
 <div class="container">
-  <img src="/assets/img/san.png" alt="" class="banner-image center">
+  <header>
+    <img src="/assets/img/san.png" alt="" class="banner-image center">
+  </header>
 
-    <app-input-filter *ngIf="nameInput !== undefined" (inputEmit)="onNameFilter($event)" [initText]="nameInput" ></app-input-filter>
+  <app-input-filter
+    *ngIf="nameInput !== undefined"
+    (inputEmit)="onNameFilter($event)"
+    [initText]="nameInput"
+  >
+  </app-input-filter>
 
-  <app-character-list [characters$]="characterService.characters$"></app-character-list>
 
-  <ng-template [ngIf]="( characterService.pagingInfo$ | async )" let-pagingInfo="$implicit">
-    <app-pager
-      class="characters-pager"
-      *ngIf="pagingInfo.hasPrev || pagingInfo.hasNext"
-      [hasPrevPage]="pagingInfo.hasPrev"
-      [hasNextPage]="pagingInfo.hasNext"
-      (prevPage)="onPrevPage()"
-      (nextPage)="onNextPage()"
-    >
-    </app-pager>
+  <ng-template [ngIf]="( characterService.charactersModel$ | async )" let-model="$implicit">
+
+    <ng-template [ngIf]="model.isLoading">
+      ...Loading
+    </ng-template>
+
+    <ng-template [ngIf]="model.isLoaded">
+      <app-character-list [characters]="model.data"></app-character-list>
+      <app-pager
+        class="characters-pager"
+        *ngIf="model.paginationInfo.hasPrev || model.paginationInfo.hasNext"
+        [hasPrevPage]="model.paginationInfo.hasPrev"
+        [hasNextPage]="model.paginationInfo.hasNext"
+        (prevPage)="onPrevPage()"
+        (nextPage)="onNextPage()"
+      >
+      </app-pager>
+    </ng-template>
+
   </ng-template>
 
 </div>
-

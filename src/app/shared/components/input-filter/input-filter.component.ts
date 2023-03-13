@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -16,7 +15,7 @@ import {debounceTime, distinctUntilChanged, filter, fromEvent, Subscription, tap
   templateUrl: './input-filter.component.html',
   styleUrls: ['./input-filter.component.css']
 })
-export class InputFilterComponent implements OnInit, AfterViewInit, OnDestroy {
+export class InputFilterComponent implements OnInit, OnDestroy {
   @ViewChild('input', {static: true}) input!: ElementRef;
   @Output() inputEmit = new EventEmitter<string>();
   @Input() initText?: string;
@@ -24,10 +23,8 @@ export class InputFilterComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.initText && this.initText !== "") this.input.nativeElement.value = this.initText;
-  }
-
-  ngAfterViewInit() {
+    if (this.initText && this.initText !== "")
+      this.input.nativeElement.value = this.initText;
     this.sub = fromEvent(this.input.nativeElement,'keyup')
       .pipe(
         filter(Boolean),

@@ -15,13 +15,10 @@ export const mapRouteParamsToCharacterQuery = (params: Params): CharactersQuery 
 }
 export const mapCharacterParamsToHttpParams = (params: CharactersQuery): HttpParams => {
   let httpParams = new HttpParams();
-  httpParams = httpParams.append('page', params.page);
 
-  httpParams = httpParams.append('name', params.name ?? "");
-  httpParams = httpParams.append('type', params.type ?? "");
-  httpParams = httpParams.append('gender', params.gender ?? "");
-  httpParams = httpParams.append('status', params.status ?? "");
-  httpParams = httpParams.append('species', params.species ?? "");
+  for (const [key, value] of Object.entries(params)) {
+    httpParams = httpParams.append(key, value);
+  }
 
   return httpParams;
 }

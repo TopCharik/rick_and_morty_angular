@@ -1,55 +1,82 @@
-<div class="single-character-header">
-  <a class="return-button btn" (click)="onReturn()">
-    go back
-  </a>
-</div>
+<ng-template [ngIf]="singleCharacterService.singleCharacterState$ | async" let-model="$implicit">
+  <ng-template [ngIf]="model.isLoaded">
 
-<div class="single-info-character-container" *ngIf="character">
-  <img src="{{character.image}}" alt="{{character.name}}" class="character-image center">
-  <h1 class="character-name">{{character.name}}</h1>
-  <h2 class="character-information-header gray">Information</h2>
-  <div class="character-information">
-    <div class="character-property">
-      <div class="character-property-name">
-        Gender
+    <ng-template [ngIf]="model.data != undefined">
+
+      <div class="single-character-header">
+        <a class="return-button btn"
+           (click)="onReturn(model.data.returnQuery)"
+        >
+          go back
+        </a>
       </div>
-      <div class="character-property-value">
-        {{character.gender}}
-      </div>
-    </div>
-    <div class="character-property">
-      <div class="character-property-name">
-        Status
-      </div>
-      <div class="character-property-value">
-        {{character.status}}
-      </div>
-    </div>
-    <div class="character-property">
-      <div class="character-property-name">
-        Specie
-      </div>
-      <div class="character-property-value">
-        {{character.species}}
-      </div>
-    </div>
-    <div class="character-property">
-      <div class="character-property-name">
-        Origin
-      </div>
-      <div class="character-property-value">
-        {{character.origin.name}}
-      </div>
-    </div>
-    <ng-template [ngIf]="character.type !== ''">
-      <div class="character-property">
-        <div class="character-property-name">
-          Type
+
+      <div class="single-info-character-container" *ngIf="model.data.character">
+        <img src="{{model.data.character.image}}" alt="{{model.data.character.name}}"
+             class="character-image center">
+        <h1 class="character-name">{{model.data.character.name}}</h1>
+        <h2 class="character-information-header gray">Information</h2>
+        <div class="character-information">
+          <div class="character-property">
+            <div class="character-property-name">
+              Gender
+            </div>
+            <div class="character-property-value">
+              {{model.data.character.gender}}
+            </div>
+          </div>
+          <div class="character-property">
+            <div class="character-property-name">
+              Status
+            </div>
+            <div class="character-property-value">
+              {{model.data.character.status}}
+            </div>
+          </div>
+          <div class="character-property">
+            <div class="character-property-name">
+              Specie
+            </div>
+            <div class="character-property-value">
+              {{model.data.character.species}}
+            </div>
+          </div>
+          <div class="character-property">
+            <div class="character-property-name">
+              Origin
+            </div>
+            <div class="character-property-value">
+              {{model.data.character.name}}
+            </div>
+          </div>
+          <ng-template [ngIf]="model.data.character.type !== ''">
+            <div class="character-property">
+              <div class="character-property-name">
+                Type
+              </div>
+              <div class="character-property-value">
+                {{model.data.character.type}}
+              </div>
+            </div>
+          </ng-template>
         </div>
-        <div class="character-property-value">
-          {{character.type}}
-        </div>
       </div>
+
     </ng-template>
-  </div>
-</div>
+
+  </ng-template>
+
+  <ng-template [ngIf]="model.isLoading">
+    ...Loading
+  </ng-template>
+
+  <ng-template [ngIf]="model.error">
+    <h1>Character not found</h1>
+
+    <a class="return-button btn"
+       (click)="onReturn(model?.data?.returnQuery || {page: 1})"
+    >
+      Return back.
+    </a>
+  </ng-template>
+</ng-template>

@@ -1,74 +1,79 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, catchError, map, Observable, of, throwError} from "rxjs";
-import {initialPaginationState, PaginationState} from "./models/paginationState";
-import {PaginationInfo} from "./models/paginationInfo";
-import {CharactersQuery} from "./models/characterQuery";
-import {Character} from "./models/character";
-import {PaginatedResponse} from "./models/paginatedResponse";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {mapCharacterParamsToHttpParams} from "./helpers/charactersMapper";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, map, Observable, tap} from "rxjs";
+import {PaginationInfo} from "../shared/models/paginationInfo";
+import {CharactersQuery} from "../shared/models/characterQuery";
+import {Character} from "../shared/models/character";
+import {ApiProvider} from "../shared/services/api-provider.service";
+import {CharactersQueryService} from "./services/characters-query.service";
+import {charactersPageInitialState, CharactersState} from "./models/charactersPageModel";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharactersService {
-  private baseUrl = environment.apiUrl;
 
-  private charactersSource = new BehaviorSubject<Character[]>([]);
-  public characters$ = this.charactersSource.asObservable();
 
-  private pagingInfoSource = new BehaviorSubject<PaginationState>(initialPaginationState);
-  public pagingInfo$: Observable<PaginationInfo> = this.pagingInfoSource.asObservable().pipe(
-    map(pagingState => {
-      return {
-        hasPrev: pagingState.prev !== null,
-        hasNext: pagingState.next !== null,
-      }
-    }),
-  );
-
-  private _currentCharacterParams!: CharactersQuery;
-  get currentCharacterParams(): CharactersQuery {
-    return this._currentCharacterParams;
-  }
+  private charactersStateSource = new BehaviorSubject<CharactersState>(charactersPageInitialState);
+  public charactersModel$: Observable<CharactersState> = this.charactersStateSource.asObservable();
 
   constructor(
-    private http: HttpClient
+    private apiProvider: ApiProvider,
+    private characterQueryService: CharactersQueryService,
   ) {  }
+
+
+  updateCharacters(characterParams: CharactersQuery) {
+    this.updateState({
+      isLoading: true,
+      isLoaded: false,
+    });
 
   loadCharacters(charactersParams: CharactersQuery) {
 
-    const httpParams = mapCharacterParamsToHttpParams(charactersParams);
-    this.http.get<PaginatedResponse<Character[]>>(this.baseUrl + "/character", {params: httpParams}).pipe(
-      catchError(err => {
-        if (err.error.error === "There is nothing here") return of(emptyApiResponse);
-        return  throwError(() => err)
+    this.apiProvider.loadCharacters(characterParams).pipe(
+      tap(() => this.characterQueryService.setCurrentQuery(characterParams)),
+      map(res => {
+        return {
+          characters: [...res.results],
+          paginationInfo: {
+            hasPrev: !!res.info.prev,
+            hasNext: !!res.info.next,
+          }
+        }
       }),
+      tap(() => this.updateState({
+        isLoading: false,
+        isLoaded: true,
+      })),
     )
       .subscribe({
         next: res => {
-          const characters = res.results.sort((a, b) => a.name.localeCompare(b.name));
-          const paginationInfo = res.info;
-          this.charactersSource.next(characters);
-          this.pagingInfoSource.next(paginationInfo);
-          this._currentCharacterParams = charactersParams;
+          const characters: Character[] = res.characters;
+          const paginationInfo: PaginationInfo = res.paginationInfo
+
+          this.updateState({
+            paginationInfo: paginationInfo,
+            data: characters,
+          });
+        },
+        error: err => {
+          this.updateState({
+            paginationInfo: {
+              hasPrev: false,
+              hasNext: false,
+            },
+            data: [],
+            error: err,
+          })
         }
-      })
+      });
   }
 
-  getSingleCharacter(id: number) {
-    return this.http.get<Character>(this.baseUrl + `/character/${id}`);
+
+  updateState(newState: Partial<CharactersState>) {
+    const currentState = this.charactersStateSource.getValue();
+    this.charactersStateSource.next({...currentState, ...newState});
   }
-
 }
 
-const emptyApiResponse:PaginatedResponse<Character[]> = {
-  info: {
-    count: 0,
-    pages: 0,
-    prev: null,
-    next: null,
-  },
-  results: []
-}

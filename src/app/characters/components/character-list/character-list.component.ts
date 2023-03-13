@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {Character} from "../../../models/character";
+import {Character} from "../../../shared/models/character";
 
 @Component({
   selector: 'app-character-list',
@@ -8,7 +7,7 @@ import {Character} from "../../../models/character";
   styleUrls: ['./character-list.component.css']
 })
 export class CharacterListComponent implements OnInit {
-  @Input() characters$!: Observable<Character[]>;
+  @Input() characters?: Character[];
 
   constructor() { }
 
