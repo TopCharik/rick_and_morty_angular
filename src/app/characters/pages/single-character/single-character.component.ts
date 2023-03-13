@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {CharactersService} from "../../characters.service";
 import {Character} from "../../../shared/models/character";
+import {SingleCharacterService} from "./single-character.service";
+import {map} from "rxjs";
+import {CharactersQuery} from "../../../shared/models/characterQuery";
 
 @Component({
   selector: 'app-single-character',
@@ -11,24 +13,26 @@ import {Character} from "../../../shared/models/character";
 export class SingleCharacterComponent implements OnInit {
   character!: Character;
 
-  constructor(private route: ActivatedRoute, private router: Router,public characterService: CharactersService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public singleCharacterService: SingleCharacterService)
+  { }
 
   ngOnInit(): void {
-    this.route.params.subscribe({
-      next: res => {
-        const id = res["id"];
-        this.characterService.getSingleCharacter(id).subscribe({
-          next: character => {
-            this.character = character
-          },
-          error: () =>  this.router.navigate(["/not-found"]),
-        })
-      }
-    }).unsubscribe();
+
+    this.route.params.pipe(
+      map(params => params["id"]),
+    )
+      .subscribe({
+        next: id => {
+          this.singleCharacterService.updateCharacter(id);
+        }
+      })
+
   }
 
-  onReturn() {
-    const params = this.characterService.currentCharacterParams ?? {};
+  onReturn(params: CharactersQuery) {
     this.router.navigate(["/characters"], {queryParams: params})
   }
 

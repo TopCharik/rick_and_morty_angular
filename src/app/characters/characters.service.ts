@@ -1,52 +1,89 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, map, Observable} from "rxjs";
-import {initialPaginationState, PaginationState} from "../shared/models/paginationState";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, map, Observable, tap} from "rxjs";
 import {PaginationInfo} from "../shared/models/paginationInfo";
 import {CharactersQuery} from "../shared/models/characterQuery";
 import {Character} from "../shared/models/character";
 import {ApiProvider} from "../shared/services/api-provider.service";
+import {PaginatedModelState} from "../shared/models/paginatedModelState";
+import {CharactersQueryService} from "./services/characters-query.service";
+
+type CharactersState = PaginatedModelState<Character[]>;
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharactersService {
 
-  private charactersSource = new BehaviorSubject<Character[]>([]);
-  public characters$ = this.charactersSource.asObservable();
+  private initialState: CharactersState = {
+    isLoading: false,
+    isLoaded: false,
+    paginationInfo: {
+      hasPrev: false,
+      hasNext: false,
+    },
+    data: [],
+    error: null,
+  };
 
-  private pagingInfoSource = new BehaviorSubject<PaginationState>(initialPaginationState);
-  public pagingInfo$: Observable<PaginationInfo> = this.pagingInfoSource.asObservable().pipe(
-    map(pagingState => {
-      return {
-        hasPrev: pagingState.prev !== null,
-        hasNext: pagingState.next !== null,
-      }
-    }),
-  );
+  private charactersStateSource = new BehaviorSubject<CharactersState>(this.initialState);
+  public charactersModel$: Observable<CharactersState> = this.charactersStateSource.asObservable();
 
-  private _currentCharacterParams!: CharactersQuery;
-  get currentCharacterParams(): CharactersQuery {
-    return this._currentCharacterParams;
+  constructor(
+    private apiProvider: ApiProvider,
+    private characterQueryService: CharactersQueryService,
+  ) {
   }
 
-  constructor(private apiProvider: ApiProvider) {}
 
-  loadCharacters(charactersParams: CharactersQuery) {
-    this.apiProvider.loadCharacters(charactersParams)
+  updateCharacters(characterParams: CharactersQuery) {
+    this.updateState({
+      isLoading: true,
+      isLoaded: false,
+    })
+
+    this.apiProvider.loadCharacters(characterParams).pipe(
+      tap(() => this.characterQueryService.setCurrentQuery(characterParams)),
+      map(res => {
+        return {
+          characters: [...res.results],
+          paginationInfo: {
+            hasPrev: !!res.info.prev,
+            hasNext: !!res.info.next,
+          }
+        }
+      }),
+      tap(() => this.updateState({
+        isLoading: false,
+        isLoaded: true,
+      })),
+    )
       .subscribe({
         next: res => {
-          const characters = res.results;
-          const paginationInfo = res.info;
-          this.charactersSource.next(characters);
-          this.pagingInfoSource.next(paginationInfo);
-          this._currentCharacterParams = charactersParams;
+          const characters: Character[] = res.characters;
+          const paginationInfo: PaginationInfo = res.paginationInfo
+
+          this.updateState({
+            paginationInfo: paginationInfo,
+            data: characters,
+          });
+        },
+        error: err => {
+          this.updateState({
+            paginationInfo: {
+              hasPrev: false,
+              hasNext: false,
+            },
+            data: [],
+            error: err,
+          })
         }
-      })
+      });
   }
 
-  getSingleCharacter(id: number) {
-    return this.apiProvider.loadSingleCharacter(id);
-  }
 
+  updateState(newState: Partial<CharactersState>) {
+    const currentState = this.charactersStateSource.getValue();
+    this.charactersStateSource.next({...currentState, ...newState});
+  }
 }
 
