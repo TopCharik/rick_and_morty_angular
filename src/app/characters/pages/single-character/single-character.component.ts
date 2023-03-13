@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Character} from "../../../shared/models/character";
 import {SingleCharacterService} from "./single-character.service";
 import {map} from "rxjs";
 import {CharactersQuery} from "../../../shared/models/characterQuery";
@@ -11,7 +10,6 @@ import {CharactersQuery} from "../../../shared/models/characterQuery";
   styleUrls: ['./single-character.component.css']
 })
 export class SingleCharacterComponent implements OnInit {
-  character!: Character;
 
   constructor(
     private route: ActivatedRoute,

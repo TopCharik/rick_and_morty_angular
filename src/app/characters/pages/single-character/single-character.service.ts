@@ -1,22 +1,20 @@
 import {Injectable} from '@angular/core';
 import {ApiProvider} from "../../../shared/services/api-provider.service";
 import {CharactersQueryService} from "../../services/characters-query.service";
-import {ModelState} from "../../../shared/models/modelState";
 import {BehaviorSubject, catchError, tap, throwError} from "rxjs";
-import {SingleCharacterModel} from "../../models/singleCharacterPageModel";
+import {
+  singleCharacterInitialState,
+  SingleCharacterState
+} from "../../models/singleCharacterPageModel";
 
 
-type SingleCharacterState = ModelState<SingleCharacterModel>;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SingleCharacterService {
-  private initialState: SingleCharacterState = {
-    isLoading: false,
-    isLoaded: false,
-  }
-  private singleCharacterStateSource = new BehaviorSubject<SingleCharacterState>(this.initialState);
+  private singleCharacterStateSource = new BehaviorSubject<SingleCharacterState>(singleCharacterInitialState);
   public singleCharacterState$ = this.singleCharacterStateSource.asObservable();
 
   constructor(

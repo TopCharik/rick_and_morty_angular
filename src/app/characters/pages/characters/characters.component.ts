@@ -54,4 +54,5 @@ export class CharactersComponent implements OnInit, OnDestroy {
 
     this.router.navigate([], {queryParams: params});
   }
+
 }

@@ -4,28 +4,17 @@ import {PaginationInfo} from "../shared/models/paginationInfo";
 import {CharactersQuery} from "../shared/models/characterQuery";
 import {Character} from "../shared/models/character";
 import {ApiProvider} from "../shared/services/api-provider.service";
-import {PaginatedModelState} from "../shared/models/paginatedModelState";
 import {CharactersQueryService} from "./services/characters-query.service";
+import {charactersPageInitialState, CharactersState} from "./models/charactersPageModel";
 
-type CharactersState = PaginatedModelState<Character[]>;
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharactersService {
 
-  private initialState: CharactersState = {
-    isLoading: false,
-    isLoaded: false,
-    paginationInfo: {
-      hasPrev: false,
-      hasNext: false,
-    },
-    data: [],
-    error: null,
-  };
 
-  private charactersStateSource = new BehaviorSubject<CharactersState>(this.initialState);
+  private charactersStateSource = new BehaviorSubject<CharactersState>(charactersPageInitialState);
   public charactersModel$: Observable<CharactersState> = this.charactersStateSource.asObservable();
 
   constructor(
@@ -39,7 +28,7 @@ export class CharactersService {
     this.updateState({
       isLoading: true,
       isLoaded: false,
-    })
+    });
 
     this.apiProvider.loadCharacters(characterParams).pipe(
       tap(() => this.characterQueryService.setCurrentQuery(characterParams)),

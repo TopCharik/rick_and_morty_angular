@@ -3,7 +3,12 @@
     <img src="/assets/img/san.png" alt="" class="banner-image center">
   </header>
 
-  <app-input-filter *ngIf="nameInput !== undefined" (inputEmit)="onNameFilter($event)" [initText]="nameInput" ></app-input-filter>
+  <app-input-filter
+    *ngIf="nameInput !== undefined"
+    (inputEmit)="onNameFilter($event)"
+    [initText]="nameInput"
+  >
+  </app-input-filter>
 
 
   <ng-template [ngIf]="( characterService.charactersModel$ | async )" let-model="$implicit">
