@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {CharactersQuery} from "../models/characterQuery";
 import {mapCharacterParamsToHttpParams} from "../../characters/helpers/charactersMapper";
 import {emptyApiResponse, PaginatedResponse} from "../models/paginatedResponse";
@@ -16,11 +16,8 @@ export class ApiProvider {
   constructor(private http: HttpClient) {
   }
 
-  loadCharacters(charactersParams?: CharactersQuery) {
-    const httpParams = new HttpParams();
-    if (charactersParams) {
-      mapCharacterParamsToHttpParams(charactersParams);
-    }
+  loadCharacters(charactersParams: CharactersQuery) {
+    const httpParams = mapCharacterParamsToHttpParams(charactersParams);
 
     return this.http.get<PaginatedResponse<Character>>(this.baseUrl + "/character", {params: httpParams}).pipe(
       catchError(err => {

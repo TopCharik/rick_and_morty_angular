@@ -32,7 +32,7 @@ export class CharactersService {
   constructor(private apiProvider: ApiProvider) {}
 
   loadCharacters(charactersParams: CharactersQuery) {
-    this.apiProvider.loadCharacters()
+    this.apiProvider.loadCharacters(charactersParams)
       .subscribe({
         next: res => {
           const characters = res.results;
