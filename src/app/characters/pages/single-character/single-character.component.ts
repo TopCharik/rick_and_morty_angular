@@ -25,8 +25,6 @@ export class SingleCharacterComponent implements OnInit {
         })
       }
     }).unsubscribe();
-
-
   }
 
   onReturn() {

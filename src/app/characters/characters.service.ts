@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, catchError, map, Observable, of, throwError} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {initialPaginationState, PaginationState} from "./models/paginationState";
 import {PaginationInfo} from "./models/paginationInfo";
 import {CharactersQuery} from "./models/characterQuery";
 import {Character} from "./models/character";
-import {PaginatedResponse} from "./models/paginatedResponse";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {mapCharacterParamsToHttpParams} from "./helpers/charactersMapper";
+import {ApiProvider} from "../shared/services/api-provider.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharactersService {
-  private baseUrl = environment.apiUrl;
 
   private charactersSource = new BehaviorSubject<Character[]>([]);
   public characters$ = this.charactersSource.asObservable();
@@ -33,22 +29,13 @@ export class CharactersService {
     return this._currentCharacterParams;
   }
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private apiProvider: ApiProvider) {}
 
-  async loadCharacters(charactersParams: CharactersQuery) {
-
-    const httpParams = mapCharacterParamsToHttpParams(charactersParams);
-    this.http.get<PaginatedResponse<Character[]>>(this.baseUrl + "/character", {params: httpParams}).pipe(
-      catchError(err => {
-        if (err.error.error === "There is nothing here") return of(emptyApiResponse);
-        return  throwError(() => err)
-      }),
-    )
+  loadCharacters(charactersParams: CharactersQuery) {
+    this.apiProvider.loadCharacters()
       .subscribe({
         next: res => {
-          const characters = res.results.sort((a, b) => a.name.localeCompare(b.name));
+          const characters = res.results;
           const paginationInfo = res.info;
           this.charactersSource.next(characters);
           this.pagingInfoSource.next(paginationInfo);
@@ -58,17 +45,8 @@ export class CharactersService {
   }
 
   getSingleCharacter(id: number) {
-    return this.http.get<Character>(this.baseUrl + `/character/${id}`);
+    return this.apiProvider.loadSingleCharacter(id);
   }
 
 }
 
-const emptyApiResponse:PaginatedResponse<Character[]> = {
-  info: {
-    count: 0,
-    pages: 0,
-    prev: null,
-    next: null,
-  },
-  results: []
-}
