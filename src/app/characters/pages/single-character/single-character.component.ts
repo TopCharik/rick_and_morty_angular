@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CharactersService} from "../../characters.service";
-import {Character} from "../../models/character";
+import {Character} from "../../../shared/models/character";
 
 @Component({
   selector: 'app-single-character',

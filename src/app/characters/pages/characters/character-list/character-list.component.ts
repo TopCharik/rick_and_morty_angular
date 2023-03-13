@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {Character} from "../../../models/character";
+import {Character} from "../../../../shared/models/character";
 
 @Component({
   selector: 'app-character-list',

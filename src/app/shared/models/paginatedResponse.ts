@@ -3,7 +3,7 @@ import {Character} from "./character";
 
 export interface PaginatedResponse<T> {
   info: PaginationState
-  results: T
+  results: T[]
 }
 
 export const emptyApiResponse:PaginatedResponse<Character[]> = {

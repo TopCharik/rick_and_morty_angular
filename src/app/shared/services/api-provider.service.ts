@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {CharactersQuery} from "../../characters/models/characterQuery";
+import {CharactersQuery} from "../models/characterQuery";
 import {mapCharacterParamsToHttpParams} from "../../characters/helpers/charactersMapper";
-import {emptyApiResponse, PaginatedResponse} from "../../characters/models/paginatedResponse";
-import {Character} from "../../characters/models/character";
+import {emptyApiResponse, PaginatedResponse} from "../models/paginatedResponse";
+import {Character} from "../models/character";
 import {catchError, of, throwError} from "rxjs";
 
 @Injectable({
@@ -22,7 +22,7 @@ export class ApiProvider {
       mapCharacterParamsToHttpParams(charactersParams);
     }
 
-    return this.http.get<PaginatedResponse<Character[]>>(this.baseUrl + "/character", {params: httpParams}).pipe(
+    return this.http.get<PaginatedResponse<Character>>(this.baseUrl + "/character", {params: httpParams}).pipe(
       catchError(err => {
         if (err.error.error === "There is nothing here") return of(emptyApiResponse);
         return throwError(() => err)
