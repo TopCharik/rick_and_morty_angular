@@ -10,7 +10,8 @@ const routes: Routes = [
       {path: ':id', component: SingleCharacterComponent},
     ]},
   {path: "not-found", component: NotFoundPageComponent},
-  {path: "**", redirectTo: "/not-found", pathMatch: "full"}
+  {path: '', redirectTo: "characters", pathMatch:"full"},
+  {path: "**", redirectTo: "not-found", pathMatch: "full"},
 ];
 
 
