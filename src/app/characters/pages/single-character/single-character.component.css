@@ -49,9 +49,10 @@
   font-weight: 900;
 }
 
-.single-character-error-container {
+.single-character-message {
   height: 100vh;
-  width: 100vw;
+  margin: auto;
+  max-width: calc(100% - 50px);
   display: flex;
   align-items: center;
   justify-content: center;

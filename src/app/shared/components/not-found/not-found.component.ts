@@ -7,13 +7,14 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
   @Input() message!: string;
-  @Input() displayReturn!: boolean;
+  @Input() returnPath?: string;
+  @Input() displayBanner!: boolean;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.message = this.message ?? "Page not found";
-    this.displayReturn = this.displayReturn ?? true;
+    this.message = this.message ?? "Not found";
+    this.displayBanner = this.displayBanner ?? false;
   }
 
 }

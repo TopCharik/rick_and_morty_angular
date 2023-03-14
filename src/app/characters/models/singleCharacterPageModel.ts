@@ -12,4 +12,5 @@ export type SingleCharacterState = ModelState<SingleCharacterModel>;
 export const singleCharacterInitialState: SingleCharacterState = {
   isLoading: false,
   isLoaded: false,
+  error: null,
 }

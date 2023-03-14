@@ -67,16 +67,19 @@
   </ng-template>
 
   <ng-template [ngIf]="model.isLoading">
-    ...Loading
+    <div class="single-character-message">
+      <app-loading></app-loading>
+    </div>
   </ng-template>
 
-  <ng-template [ngIf]="model.error">
-    <div class="single-character-error-container">
-      <app-not-found
-        [message]="'Character not found.'"
-        [displayReturn]="true"
-      >
-      </app-not-found>
-    </div>
+  <ng-template [ngIf]="model.error !== null">
+        <div class="single-character-message">
+          <app-not-found
+            [displayBanner]="true"
+            [message]="'Character not found.'"
+            [returnPath]="'/characters'"
+          >
+          </app-not-found>
+        </div>
   </ng-template>
 </ng-template>

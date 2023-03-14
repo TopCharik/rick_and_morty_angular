@@ -1,3 +1,9 @@
+.return-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .not-found-message {
   font-size: 3rem;
   text-align: center;
@@ -5,5 +11,9 @@
 
 .return-button {
   margin-top: 2rem;
-  display: block;
+  width: 80%;
+}
+
+.not-found-image {
+  max-height: 40vh;
 }

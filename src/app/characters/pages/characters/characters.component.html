@@ -14,9 +14,7 @@
 
 
   <div class="characters-container">
-    <ng-template [ngIf]="model.isLoading">
-      ...Loading
-    </ng-template>
+    <app-loading *ngIf="model.isLoading"></app-loading>
 
     <ng-template [ngIf]="model.isLoaded">
 
@@ -39,7 +37,6 @@
       <ng-template [ngIf]="model.data?.length === 0">
         <app-not-found
           [message]="'Characters not found'"
-          [displayReturn]="false"
         >
         </app-not-found>
       </ng-template>

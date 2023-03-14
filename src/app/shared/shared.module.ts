@@ -5,6 +5,7 @@ import { InputFilterComponent } from './components/input-filter/input-filter.com
 import { PagerComponent } from './components/pager/pager.component';
 import {RouterLinkWithHref} from "@angular/router";
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 
@@ -13,12 +14,14 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
         NotFoundComponent,
         InputFilterComponent,
         PagerComponent,
-        NotFoundPageComponent
+        NotFoundPageComponent,
+        LoadingComponent
     ],
     exports: [
         InputFilterComponent,
         PagerComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        LoadingComponent
     ],
   imports: [
     CommonModule,
