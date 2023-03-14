@@ -1,8 +1,7 @@
 .cards {
   max-width: 1200px;
-  margin: 3rem 0;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 
