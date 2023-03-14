@@ -71,12 +71,12 @@
   </ng-template>
 
   <ng-template [ngIf]="model.error">
-    <h1>Character not found</h1>
-
-    <a class="return-button btn"
-       (click)="onReturn(model?.data?.returnQuery || {page: 1})"
-    >
-      Return back.
-    </a>
+    <div class="single-character-error-container">
+      <app-not-found
+        [message]="'Character not found.'"
+        [displayReturn]="true"
+      >
+      </app-not-found>
+    </div>
   </ng-template>
 </ng-template>

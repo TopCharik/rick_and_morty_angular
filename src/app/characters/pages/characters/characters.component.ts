@@ -16,14 +16,14 @@ export class CharactersComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private charactersQueryService: CharactersQueryService,
     public characterService: CharactersService,
-    public charactersQueryService: CharactersQueryService,
   ) {  }
 
   ngOnInit(): void {
     this.sub = this.route.queryParams.pipe(
       map(mapRouteParamsToCharacterQuery),
-      tap(query => this.nameInput = query.name ?? ""),
+      tap(query => this.nameInput = query.name),
       tap(query => this.characterService.updateCharacters(query))
     )
       .subscribe();

@@ -49,8 +49,12 @@
   font-weight: 900;
 }
 
-.character-property-value {
-
+.single-character-error-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 600px) {

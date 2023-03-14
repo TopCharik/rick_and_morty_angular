@@ -1,0 +1,9 @@
+.not-found-message {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.return-button {
+  margin-top: 2rem;
+  display: block;
+}

@@ -1,0 +1,13 @@
+<div class="not-found-container">
+  <p class="not-found-message">
+    {{message}}
+  </p>
+  <div class="break"></div>
+  <a
+    *ngIf="displayReturn"
+    class="btn btn-primary return-button"
+    routerLink="/"
+  >
+    Return to main page
+  </a>
+</div>

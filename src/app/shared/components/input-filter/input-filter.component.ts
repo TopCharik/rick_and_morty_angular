@@ -17,18 +17,22 @@ import {debounceTime, distinctUntilChanged, filter, fromEvent, Subscription, tap
 })
 export class InputFilterComponent implements OnInit, OnDestroy {
   @ViewChild('input', {static: true}) input!: ElementRef;
-  @Output() inputEmit = new EventEmitter<string>();
   @Input() initText?: string;
+  @Input() debounceTime?: number;
+  @Output() inputEmit = new EventEmitter<string>();
+
   sub!: Subscription;
   constructor() { }
 
   ngOnInit(): void {
-    if (this.initText && this.initText !== "")
+    if (this.initText) {
       this.input.nativeElement.value = this.initText;
+    }
+
     this.sub = fromEvent(this.input.nativeElement,'keyup')
       .pipe(
         filter(Boolean),
-        debounceTime(500),
+        debounceTime(this.debounceTime ?? 500),
         distinctUntilChanged(),
         tap(() => this.inputEmit.emit(this.input.nativeElement.value)),
       )
@@ -37,5 +41,10 @@ export class InputFilterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  onReset() {
+    this.input.nativeElement.value = "";
+    this.inputEmit.emit('');
   }
 }

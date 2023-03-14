@@ -2,23 +2,27 @@
   width: 1200px;
   min-height: 100vh;
   height: 100%;
-  max-width: calc(100% - 50px );
+  max-width: calc(100% - 50px);
   margin: 0 auto;
 }
 
-.cards {
-  max-width: 1200px;
-  display: grid;
-  gap: 3rem;
-}
 
 .banner-image {
   width: 60%;
   height: auto;
 }
 
+.name-filter {
+  display: block;
+  margin: 3rem 0 0 0;
+}
+
+.characters-container {
+  margin: 3rem 0 0 0;
+}
+
 .characters-pager {
-  margin: 3rem;
+  margin: 3rem 3rem 0 0;
 }
 
 @media (min-width: 600px) {

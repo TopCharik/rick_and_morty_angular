@@ -1,34 +1,53 @@
 <div class="container">
+
   <header>
     <img src="/assets/img/san.png" alt="" class="banner-image center">
   </header>
-
+  <ng-template [ngIf]="( characterService.charactersModel$ | async )" let-model="$implicit">
   <app-input-filter
-    *ngIf="nameInput !== undefined"
+    class="name-filter"
     (inputEmit)="onNameFilter($event)"
     [initText]="nameInput"
+    [debounceTime]="300"
   >
   </app-input-filter>
 
 
-  <ng-template [ngIf]="( characterService.charactersModel$ | async )" let-model="$implicit">
-
+  <div class="characters-container">
     <ng-template [ngIf]="model.isLoading">
       ...Loading
     </ng-template>
 
     <ng-template [ngIf]="model.isLoaded">
-      <app-character-list [characters]="model.data"></app-character-list>
-      <app-pager
-        class="characters-pager"
-        *ngIf="model.paginationInfo.hasPrev || model.paginationInfo.hasNext"
-        [hasPrevPage]="model.paginationInfo.hasPrev"
-        [hasNextPage]="model.paginationInfo.hasNext"
-        (prevPage)="onPrevPage()"
-        (nextPage)="onNextPage()"
-      >
-      </app-pager>
+
+      <ng-template [ngIf]="model.data?.length !== 0">
+
+        <app-character-list [characters]="model.data"></app-character-list>
+
+        <app-pager
+          class="characters-pager"
+          *ngIf="model.paginationInfo.hasPrev || model.paginationInfo.hasNext"
+          [hasPrevPage]="model.paginationInfo.hasPrev"
+          [hasNextPage]="model.paginationInfo.hasNext"
+          (prevPage)="onPrevPage()"
+          (nextPage)="onNextPage()"
+        >
+        </app-pager>
+
+      </ng-template>
+
+      <ng-template [ngIf]="model.data?.length === 0">
+        <app-not-found
+          [message]="'Characters not found'"
+          [displayReturn]="false"
+        >
+        </app-not-found>
+      </ng-template>
+
     </ng-template>
+  </div>
+
+
 
   </ng-template>
 
