@@ -24,7 +24,7 @@ export class CharactersService {
   }
 
 
-  updateCharacters(characterParams: CharactersQuery) {
+  public updateCharacters(characterParams: CharactersQuery) {
     this.updateState({
       isLoading: true,
       isLoaded: false,
@@ -70,7 +70,7 @@ export class CharactersService {
   }
 
 
-  updateState(newState: Partial<CharactersState>) {
+  private updateState(newState: Partial<CharactersState>) {
     const currentState = this.charactersStateSource.getValue();
     this.charactersStateSource.next({...currentState, ...newState});
   }
