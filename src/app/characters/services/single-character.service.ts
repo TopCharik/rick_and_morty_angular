@@ -22,7 +22,7 @@ export class SingleCharacterService {
     private characterQueryService: CharactersQueryService,
   ) {  }
 
-  updateCharacter(id: number) {
+  public updateCharacter(id: number) {
     this.updateState({
       isLoading: true,
       isLoaded: false,
