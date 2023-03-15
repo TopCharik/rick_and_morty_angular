@@ -4,7 +4,6 @@ import {PaginationInfo} from "../../shared/models/paginationInfo";
 import {CharactersQuery} from "../../shared/models/characterQuery";
 import {Character} from "../../shared/models/character";
 import {ApiProvider} from "../../shared/services/api-provider.service";
-import {CharactersQueryService} from "./characters-query.service";
 import {charactersPageInitialState, CharactersState} from "../models/charactersPageModel";
 
 
@@ -19,7 +18,6 @@ export class CharactersService {
 
   constructor(
     private apiProvider: ApiProvider,
-    private characterQueryService: CharactersQueryService,
   ) {
   }
 
@@ -31,7 +29,6 @@ export class CharactersService {
     });
 
     this.apiProvider.loadCharacters(characterParams).pipe(
-      tap(() => this.characterQueryService.setCurrentQuery(characterParams)),
       map(res => {
         return {
           characters: [...res.results],

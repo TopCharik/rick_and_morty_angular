@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SingleCharacterService} from "../../services/single-character.service";
 import {map} from "rxjs";
-import {CharactersQuery} from "../../../shared/models/characterQuery";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-single-character',
@@ -14,6 +14,7 @@ export class SingleCharacterComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     public singleCharacterService: SingleCharacterService)
   { }
 
@@ -24,14 +25,14 @@ export class SingleCharacterComponent implements OnInit {
     )
       .subscribe({
         next: id => {
-          this.singleCharacterService.updateCharacter(id);
+          this.singleCharacterService.loadCharacter(id);
         }
       })
 
   }
 
-  onReturn(params: CharactersQuery) {
-    this.router.navigate(["/characters"], {queryParams: params})
+  onReturn() {
+    this.location.back();
   }
 
 }

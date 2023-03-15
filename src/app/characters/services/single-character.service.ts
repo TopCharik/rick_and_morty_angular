@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {ApiProvider} from "../../shared/services/api-provider.service";
-import {CharactersQueryService} from "./characters-query.service";
 import {BehaviorSubject, catchError, tap, throwError} from "rxjs";
 import {
   singleCharacterInitialState,
@@ -19,10 +18,9 @@ export class SingleCharacterService {
 
   constructor(
     private apiProvider: ApiProvider,
-    private characterQueryService: CharactersQueryService,
   ) {  }
 
-  public updateCharacter(id: number) {
+  public loadCharacter(id: number) {
     this.updateState({
       isLoading: true,
       isLoaded: false,
@@ -46,10 +44,7 @@ export class SingleCharacterService {
       .subscribe({
       next: character => {
         this.updateState({
-          data: {
-            character: character,
-            returnQuery: this.characterQueryService.getCurrentQuery(),
-          },
+          data: character,
           error: null,
         });
       },
