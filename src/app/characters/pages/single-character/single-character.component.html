@@ -5,16 +5,16 @@
 
       <div class="single-character-header">
         <a class="return-button btn"
-           (click)="onReturn(model.data.returnQuery)"
+           (click)="onReturn()"
         >
           go back
         </a>
       </div>
 
-      <div class="single-info-character-container" *ngIf="model.data.character">
-        <img src="{{model.data.character.image}}" alt="{{model.data.character.name}}"
+      <div class="single-info-character-container" *ngIf="model.data">
+        <img src="{{model.data.image}}" alt="{{model.data.name}}"
              class="character-image center">
-        <h1 class="character-name">{{model.data.character.name}}</h1>
+        <h1 class="character-name">{{model.data.name}}</h1>
         <h2 class="character-information-header gray">Information</h2>
         <div class="character-information">
           <div class="character-property">
@@ -22,7 +22,7 @@
               Gender
             </div>
             <div class="character-property-value">
-              {{model.data.character.gender}}
+              {{model.data.gender}}
             </div>
           </div>
           <div class="character-property">
@@ -30,7 +30,7 @@
               Status
             </div>
             <div class="character-property-value">
-              {{model.data.character.status}}
+              {{model.data.status}}
             </div>
           </div>
           <div class="character-property">
@@ -38,7 +38,7 @@
               Specie
             </div>
             <div class="character-property-value">
-              {{model.data.character.species}}
+              {{model.data.species}}
             </div>
           </div>
           <div class="character-property">
@@ -46,16 +46,16 @@
               Origin
             </div>
             <div class="character-property-value">
-              {{model.data.character.name}}
+              {{model.data.name}}
             </div>
           </div>
-          <ng-template [ngIf]="model.data.character.type !== ''">
+          <ng-template [ngIf]="model.data.type !== ''">
             <div class="character-property">
               <div class="character-property-name">
                 Type
               </div>
               <div class="character-property-value">
-                {{model.data.character.type}}
+                {{model.data.type}}
               </div>
             </div>
           </ng-template>
