@@ -1,4 +1,10 @@
 <div class="input-container">
   <input #input class="filter-form" placeholder="Filter by name..." type="text">
-  <a class="btn btn-primary form-button" (click)="onReset()">Reset</a>
+  <button
+    class="btn btn-primary form-button"
+    (click)="onReset()"
+    [disabled]="input.value.trim().length === 0"
+  >
+    Reset
+  </button>
 </div>
