@@ -1,0 +1,43 @@
+<ng-template [ngIf]="singleCharacterService.singleCharacterState$ | async" let-model="$implicit">
+
+  <app-model-container
+    [isLoading]="model.isLoading"
+    [error]="model.error"
+    [dataTemplate]="characterDetails"
+    [loadingTemplate]="characterSpinner"
+    [errorTemplate]="characterError"
+  >
+  </app-model-container>
+
+
+  <ng-template #characterSpinner>
+    <div class="single-character-message">
+      <app-loading></app-loading>
+    </div>
+  </ng-template>
+
+  <ng-template #characterDetails>
+
+    <div class="return-button-container">
+      <app-return-button></app-return-button>
+    </div>
+
+    <app-character-details-card
+      [character]="model.data"
+    >
+    </app-character-details-card>
+
+  </ng-template>
+
+  <ng-template #characterError>
+    <div class="single-character-message">
+      <app-not-found
+        [displayBanner]="true"
+        [message]="'Character not found.'"
+        [returnPath]="'/characters'"
+      >
+      </app-not-found>
+    </div>
+  </ng-template>
+
+</ng-template>

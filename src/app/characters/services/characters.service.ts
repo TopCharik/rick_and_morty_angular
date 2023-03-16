@@ -25,7 +25,6 @@ export class CharactersService {
   public updateCharacters(characterParams: CharactersQuery) {
     this.updateState({
       isLoading: true,
-      isLoaded: false,
     });
 
     this.apiProvider.loadCharacters(characterParams).pipe(
@@ -40,7 +39,6 @@ export class CharactersService {
       }),
       tap(() => this.updateState({
         isLoading: false,
-        isLoaded: true,
       })),
     )
       .subscribe({
@@ -51,6 +49,7 @@ export class CharactersService {
           this.updateState({
             paginationInfo: paginationInfo,
             data: characters,
+            error: undefined,
           });
         },
         error: err => {

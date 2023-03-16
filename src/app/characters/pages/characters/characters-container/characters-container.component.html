@@ -1,0 +1,42 @@
+<ng-template [ngIf]="model">
+
+  <app-model-container
+    [isLoading]="model.isLoading"
+    [error]="model.error"
+    [dataTemplate]="characters"
+  >
+  </app-model-container>
+
+
+
+  <ng-template #characters>
+    <div class="characters-container">
+
+      <ng-template [ngIf]="!model.isLoading">
+        <ng-template [ngIf]="model.data?.length !== 0">
+
+          <app-character-list [characters]="model.data"></app-character-list>
+
+          <app-pager
+            class="characters-pager"
+            *ngIf="model.paginationInfo.hasPrev || model.paginationInfo.hasNext"
+            [hasPrevPage]="model.paginationInfo.hasPrev"
+            [hasNextPage]="model.paginationInfo.hasNext"
+            (prevPage)="prevPage.emit()"
+            (nextPage)="nextPage.emit()"
+          >
+          </app-pager>
+
+        </ng-template>
+
+        <ng-template [ngIf]="model.data?.length === 0">
+          <app-not-found
+            [message]="'Characters not found'"
+          >
+          </app-not-found>
+        </ng-template>
+      </ng-template>
+    </div>
+  </ng-template>
+
+</ng-template>

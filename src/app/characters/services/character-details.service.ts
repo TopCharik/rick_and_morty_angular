@@ -12,7 +12,7 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class SingleCharacterService {
+export class CharacterDetailsService {
   private singleCharacterStateSource = new BehaviorSubject<SingleCharacterState>(singleCharacterInitialState);
   public singleCharacterState$ = this.singleCharacterStateSource.asObservable();
 
@@ -23,20 +23,17 @@ export class SingleCharacterService {
   public loadCharacter(id: number) {
     this.updateState({
       isLoading: true,
-      isLoaded: false,
     });
 
     this.apiProvider.loadSingleCharacter(id).pipe(
       tap(() => {
         this.updateState({
           isLoading: false,
-          isLoaded: true,
         });
       }),
       catchError((err) => {
         this.updateState({
           isLoading: false,
-          isLoaded: true,
         });
         return throwError(() => err)
       })
@@ -45,7 +42,7 @@ export class SingleCharacterService {
       next: character => {
         this.updateState({
           data: character,
-          error: null,
+          error: undefined,
         });
       },
       error: err => {
