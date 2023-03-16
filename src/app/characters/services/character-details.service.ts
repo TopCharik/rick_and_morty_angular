@@ -12,7 +12,7 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class SingleCharacterService {
+export class CharacterDetailsService {
   private singleCharacterStateSource = new BehaviorSubject<SingleCharacterState>(singleCharacterInitialState);
   public singleCharacterState$ = this.singleCharacterStateSource.asObservable();
 

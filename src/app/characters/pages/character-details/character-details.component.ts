@@ -1,21 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {SingleCharacterService} from "../../services/single-character.service";
+import {CharacterDetailsService} from "../../services/character-details.service";
 import {map} from "rxjs";
 import {Location} from "@angular/common";
 
 @Component({
-  selector: 'app-single-character',
-  templateUrl: './single-character.component.html',
-  styleUrls: ['./single-character.component.css']
+  selector: 'app-character-details',
+  templateUrl: './character-details.component.html',
+  styleUrls: ['./character-details.component.css']
 })
-export class SingleCharacterComponent implements OnInit {
+export class CharacterDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    public singleCharacterService: SingleCharacterService)
+    public singleCharacterService: CharacterDetailsService)
   { }
 
   ngOnInit(): void {
