@@ -18,25 +18,27 @@
 
   <ng-template #characterDetails>
 
-    <div class="return-button-container">
-      <app-return-button></app-return-button>
-    </div>
+    <ng-template [ngIf]="model.data !== undefined">
+      <div class="return-button-container">
+        <app-return-button></app-return-button>
+      </div>
 
-    <app-character-details-card
-      [character]="model.data"
-    >
-    </app-character-details-card>
+      <app-character-details-card
+        [character]="model.data"
+      >
+      </app-character-details-card>
+    </ng-template>
 
   </ng-template>
 
   <ng-template #characterError>
     <div class="single-character-message">
-      <app-not-found
-        [displayBanner]="true"
-        [message]="'Character not found.'"
-        [returnPath]="'/characters'"
-      >
-      </app-not-found>
+        <app-not-found
+          [displayBanner]="true"
+          [message]="'Character not found.'"
+          [returnPath]="'/characters'"
+        >
+        </app-not-found>
     </div>
   </ng-template>
 

@@ -7,7 +7,7 @@ import {Character} from "../../../shared/models/character";
   styleUrls: ['./character-details-card.component.css']
 })
 export class CharacterDetailsCardComponent implements OnInit {
-  @Input() character?: Character;
+  @Input() character!: Character;
 
   constructor() { }
 
