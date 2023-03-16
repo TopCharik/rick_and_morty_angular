@@ -31,13 +31,10 @@
   font-weight: 900;
 }
 
-.single-character-message {
+
+
+.test-container {
   height: 100vh;
-  margin: auto;
-  max-width: calc(100% - 50px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 @media (max-width: 600px) {

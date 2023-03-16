@@ -5,3 +5,12 @@
 .return-button-container {
   padding: 2rem 0 0 calc(3vw);
 }
+
+.single-character-message {
+  height: 100vh;
+  margin: auto;
+  max-width: calc(100% - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
