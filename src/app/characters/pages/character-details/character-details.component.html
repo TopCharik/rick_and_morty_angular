@@ -11,56 +11,7 @@
         </a>
       </div>
 
-      <div class="single-info-character-container" *ngIf="model.data">
-        <img src="{{model.data.image}}" alt="{{model.data.name}}"
-             class="character-image center">
-        <h1 class="character-name">{{model.data.name}}</h1>
-        <h2 class="character-information-header gray">Information</h2>
-        <div class="character-information">
-          <div class="character-property">
-            <div class="character-property-name">
-              Gender
-            </div>
-            <div class="character-property-value">
-              {{model.data.gender}}
-            </div>
-          </div>
-          <div class="character-property">
-            <div class="character-property-name">
-              Status
-            </div>
-            <div class="character-property-value">
-              {{model.data.status}}
-            </div>
-          </div>
-          <div class="character-property">
-            <div class="character-property-name">
-              Specie
-            </div>
-            <div class="character-property-value">
-              {{model.data.species}}
-            </div>
-          </div>
-          <div class="character-property">
-            <div class="character-property-name">
-              Origin
-            </div>
-            <div class="character-property-value">
-              {{model.data.name}}
-            </div>
-          </div>
-          <ng-template [ngIf]="model.data.type !== ''">
-            <div class="character-property">
-              <div class="character-property-name">
-                Type
-              </div>
-              <div class="character-property-value">
-                {{model.data.type}}
-              </div>
-            </div>
-          </ng-template>
-        </div>
-      </div>
+      <app-character-details-card [character]="model.data"></app-character-details-card>
 
     </ng-template>
 
