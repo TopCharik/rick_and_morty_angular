@@ -1,0 +1,32 @@
+<ng-template [ngIf]="isLoading">
+
+  <ng-template [ngIf]="loadingTemplate">
+    <ng-container [ngTemplateOutlet]="loadingTemplate">
+    </ng-container>
+  </ng-template>
+
+  <ng-template [ngIf]="!loadingTemplate">
+    <app-loading></app-loading>
+  </ng-template>
+
+</ng-template>
+
+<ng-template [ngIf]="!isLoading">
+
+  <ng-template [ngIf]="dataTemplate">
+    <ng-container [ngTemplateOutlet]="dataTemplate"></ng-container>
+  </ng-template>
+
+</ng-template>
+
+<ng-template [ngIf]="error !== undefined">
+
+  <ng-template [ngIf]="errorTemplate">
+    <ng-container [ngTemplateOutlet]="errorTemplate"></ng-container>
+  </ng-template>
+
+  <ng-template [ngIf]="errorTemplate">
+    <ng-container [ngTemplateOutlet]="errorTemplate"></ng-container>
+  </ng-template>
+
+</ng-template>

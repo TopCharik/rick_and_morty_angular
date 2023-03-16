@@ -8,6 +8,7 @@ import {SharedModule} from "../shared/shared.module";
 import { CharacterCardComponent } from './components/character-card/character-card.component';
 import {CharactersRoutingModule} from "./characters-routing.module";
 import { CharacterDetailsCardComponent } from './components/character-details-card/character-details-card.component';
+import { CharactersContainerComponent } from './pages/characters/characters-container/characters-container.component';
 
 
 
@@ -18,6 +19,7 @@ import { CharacterDetailsCardComponent } from './components/character-details-ca
     CharacterListComponent,
     CharacterCardComponent,
     CharacterDetailsCardComponent,
+    CharactersContainerComponent,
   ],
   imports: [
     CommonModule,

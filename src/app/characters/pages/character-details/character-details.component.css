@@ -1,4 +1,7 @@
-.return-button-container {
-  margin: 2rem 0 0 calc(3vw);
+.details-container {
+  height: 100vh;
 }
 
+.return-button-container {
+  padding: 2rem 0 0 calc(3vw);
+}

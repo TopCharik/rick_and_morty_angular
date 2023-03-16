@@ -6,7 +6,7 @@ import { PagerComponent } from './components/pager/pager.component';
 import {RouterLinkWithHref} from "@angular/router";
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { PageModelContainerComponent } from './components/page-model-container/page-model-container.component';
+import { ModelContainerComponent } from './components/model-container/model-container.component';
 import { ReturnButtonComponent } from './components/return-button/return-button.component';
 
 
@@ -18,7 +18,7 @@ import { ReturnButtonComponent } from './components/return-button/return-button.
         PagerComponent,
         NotFoundPageComponent,
         LoadingComponent,
-        PageModelContainerComponent,
+        ModelContainerComponent,
         ReturnButtonComponent
     ],
   exports: [
@@ -26,7 +26,8 @@ import { ReturnButtonComponent } from './components/return-button/return-button.
     PagerComponent,
     NotFoundComponent,
     LoadingComponent,
-    ReturnButtonComponent
+    ReturnButtonComponent,
+    ModelContainerComponent
   ],
   imports: [
     CommonModule,
