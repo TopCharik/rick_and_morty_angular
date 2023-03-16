@@ -1,9 +1,4 @@
-.characters-container {
-  margin: 4rem 0 2rem 0;
-  display: block;
-}
-
 .characters-pager {
   display: block;
-  margin: 2rem;
+  margin-top: 2rem;
 }

@@ -12,13 +12,14 @@
     >
     </app-input-filter>
 
-
-    <app-characters-container
-      [model]="model"
-      (prevPage)="onPrevPage()"
-      (nextPage)="onNextPage()"
-    >
-    </app-characters-container>
+    <div class="characters-container">
+      <app-characters-container
+        [model]="model"
+        (prevPage)="onPrevPage()"
+        (nextPage)="onNextPage()"
+      >
+      </app-characters-container>
+    </div>
 
 
   </ng-template>
