@@ -8,7 +8,10 @@
   </div>
   <div class="card-label-container">
     <div class="card-label">
-      <h4 class="card-label-name">
+      <h4
+        class="card-label-name"
+        routerLink="/characters/{{character.id}}"
+      >
         <b>{{character.name}}</b>
       </h4>
       <p class="card-label-species">{{character.species}}</p>
