@@ -34,7 +34,7 @@ export class InputFilterComponent implements OnInit, OnDestroy {
         filter(Boolean),
         debounceTime(this.debounceTime ?? 500),
         distinctUntilChanged(),
-        tap(() => this.inputEmit.emit(this.input.nativeElement.value)),
+        tap(() => this.inputEmit.emit(this.input.nativeElement.value.trim())),
       )
       .subscribe();
   }
