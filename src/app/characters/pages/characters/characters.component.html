@@ -16,8 +16,7 @@
   <div class="characters-container">
     <app-loading *ngIf="model.isLoading"></app-loading>
 
-    <ng-template [ngIf]="model.isLoaded">
-
+    <ng-template [ngIf]="!model.isLoading">
       <ng-template [ngIf]="model.data?.length !== 0">
 
         <app-character-list [characters]="model.data"></app-character-list>

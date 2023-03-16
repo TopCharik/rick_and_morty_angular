@@ -23,20 +23,17 @@ export class CharacterDetailsService {
   public loadCharacter(id: number) {
     this.updateState({
       isLoading: true,
-      isLoaded: false,
     });
 
     this.apiProvider.loadSingleCharacter(id).pipe(
       tap(() => {
         this.updateState({
           isLoading: false,
-          isLoaded: true,
         });
       }),
       catchError((err) => {
         this.updateState({
           isLoading: false,
-          isLoaded: true,
         });
         return throwError(() => err)
       })
@@ -45,7 +42,7 @@ export class CharacterDetailsService {
       next: character => {
         this.updateState({
           data: character,
-          error: null,
+          error: undefined,
         });
       },
       error: err => {

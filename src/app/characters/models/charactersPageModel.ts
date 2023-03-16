@@ -5,11 +5,9 @@ export type CharactersState = PaginatedModelState<Character>;
 
 export const charactersPageInitialState: CharactersState = {
   isLoading: false,
-  isLoaded: false,
   paginationInfo: {
     hasPrev: false,
     hasNext: false,
   },
   data: [],
-  error: null,
 };

@@ -1,21 +1,5 @@
 <ng-template [ngIf]="singleCharacterService.singleCharacterState$ | async" let-model="$implicit">
-  <ng-template [ngIf]="model.isLoaded">
 
-    <ng-template [ngIf]="model.data != undefined">
-
-      <div class="single-character-header">
-        <a class="return-button btn"
-           (click)="onReturn()"
-        >
-          go back
-        </a>
-      </div>
-
-      <app-character-details-card [character]="model.data"></app-character-details-card>
-
-    </ng-template>
-
-  </ng-template>
 
   <ng-template [ngIf]="model.isLoading">
     <div class="single-character-message">
@@ -23,14 +7,31 @@
     </div>
   </ng-template>
 
-  <ng-template [ngIf]="model.error !== null">
-        <div class="single-character-message">
-          <app-not-found
-            [displayBanner]="true"
-            [message]="'Character not found.'"
-            [returnPath]="'/characters'"
-          >
-          </app-not-found>
-        </div>
+  <ng-template [ngIf]="!model.isLoading">
+    <ng-template [ngIf]="model.data != undefined">
+
+      <div class="return-button-container">
+        <app-return-button></app-return-button>
+      </div>
+
+      <app-character-details-card
+        [character]="model.data"
+      >
+      </app-character-details-card>
+
+    </ng-template>
   </ng-template>
+
+
+  <ng-template [ngIf]="model.error !== undefined">
+    <div class="single-character-message">
+      <app-not-found
+        [displayBanner]="true"
+        [message]="'Character not found.'"
+        [returnPath]="'/characters'"
+      >
+      </app-not-found>
+    </div>
+  </ng-template>
+
 </ng-template>
