@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {CharacterDetailsService} from "../../services/character-details.service";
 import {map} from "rxjs";
-import {Location} from "@angular/common";
+import {CharactersService} from "../../services/characters.service";
 
 @Component({
   selector: 'app-character-details',
@@ -10,12 +10,13 @@ import {Location} from "@angular/common";
   styleUrls: ['./character-details.component.css']
 })
 export class CharacterDetailsComponent implements OnInit {
+  canReturn = false;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
-    public singleCharacterService: CharacterDetailsService)
+    private charactersService: CharactersService,
+    public singleCharacterService: CharacterDetailsService,
+  )
   { }
 
   ngOnInit(): void {
@@ -28,11 +29,15 @@ export class CharacterDetailsComponent implements OnInit {
           this.singleCharacterService.loadCharacter(id);
         }
       })
+      .unsubscribe();
+
+    this.charactersService.charactersModel$.pipe(
+      map(charactersModel => charactersModel.isLoaded)
+    )
+      .subscribe({
+      next: canReturn => this.canReturn = canReturn,
+    })
+      .unsubscribe();
 
   }
-
-  onReturn() {
-    this.location.back();
-  }
-
 }

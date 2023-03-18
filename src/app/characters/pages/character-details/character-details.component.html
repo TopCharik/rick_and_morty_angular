@@ -20,7 +20,7 @@
 
     <ng-template [ngIf]="model.data !== undefined">
       <div class="return-button-container">
-        <app-return-button></app-return-button>
+        <app-return-button [canReturn]="canReturn"></app-return-button>
       </div>
 
       <app-character-details-card

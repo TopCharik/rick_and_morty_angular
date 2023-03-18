@@ -26,7 +26,6 @@ export class CharactersService {
     this.updateState({
       isLoading: true,
     });
-
     this.apiProvider.loadCharacters(characterParams).pipe(
       map(res => {
         return {
@@ -39,6 +38,7 @@ export class CharactersService {
       }),
       tap(() => this.updateState({
         isLoading: false,
+        isLoaded: true,
       })),
     )
       .subscribe({

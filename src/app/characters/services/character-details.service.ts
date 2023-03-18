@@ -29,6 +29,7 @@ export class CharacterDetailsService {
       tap(() => {
         this.updateState({
           isLoading: false,
+          isLoaded: true,
         });
       }),
       catchError((err) => {
