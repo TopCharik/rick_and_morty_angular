@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-return-button',
@@ -7,13 +8,23 @@ import {Location} from "@angular/common";
   styleUrls: ['./return-button.component.css']
 })
 export class ReturnButtonComponent implements OnInit {
+  @Input() canReturn = false;
 
-  constructor(private location: Location) { }
+  constructor(
+    private location: Location,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
 
   onReturn() {
-    this.location.back();
+    if (this.canReturn){
+      this.location.back();
+    }
+    else {
+      this.router.navigate(['/']);
+    }
   }
+
 }
