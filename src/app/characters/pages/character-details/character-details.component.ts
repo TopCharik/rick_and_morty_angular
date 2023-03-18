@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {CharacterDetailsService} from "../../services/character-details.service";
 import {map} from "rxjs";
-import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-character-details',
@@ -13,8 +12,6 @@ export class CharacterDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
     public singleCharacterService: CharacterDetailsService)
   { }
 
@@ -30,9 +27,4 @@ export class CharacterDetailsComponent implements OnInit {
       })
 
   }
-
-  onReturn() {
-    this.location.back();
-  }
-
 }
