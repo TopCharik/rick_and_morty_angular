@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ApiProvider} from "../../shared/services/api-provider.service";
+import {ApiProvider} from "../../services/api-provider.service";
 import {BehaviorSubject, catchError, tap, throwError} from "rxjs";
 import {
   singleCharacterInitialState,

@@ -1,4 +1,4 @@
-import {CharactersQuery} from "../models/characterQuery";
+import {CharactersQuery} from "../../models/characterQuery";
 import {HttpParams} from "@angular/common/http";
 import {Params} from "@angular/router";
 
