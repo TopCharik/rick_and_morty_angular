@@ -1,5 +1,5 @@
-import {Character} from "../../shared/models/character";
-import {ModelState} from "../../shared/models/modelState";
+import {Character} from "../../models/character";
+import {ModelState} from "../../models/modelState";
 
 
 export type SingleCharacterState = ModelState<Character>;

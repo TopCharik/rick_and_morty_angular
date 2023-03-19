@@ -3,7 +3,7 @@ import {CharactersService} from "../../services/characters.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {mapRouteParamsToCharacterQuery} from "../../../shared/helpers/charactersMapper";
 import {map, Subscription, tap} from "rxjs";
-import {CharactersQuery} from "../../../shared/models/characterQuery";
+import {CharactersQuery} from "../../../models/characterQuery";
 
 @Component({
   selector: 'app-characters',

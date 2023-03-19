@@ -1,5 +1,5 @@
-import {PaginatedModelState} from "../../shared/models/paginatedModelState";
-import {Character} from "../../shared/models/character";
+import {PaginatedModelState} from "../../models/paginatedModelState";
+import {Character} from "../../models/character";
 
 export type CharactersState = PaginatedModelState<Character>;
 
